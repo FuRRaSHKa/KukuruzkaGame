@@ -12,7 +12,7 @@ public class MoovingScript : MonoBehaviour {
 
     private Rigidbody2D rgbd;
     private float horizontalDirection = 0;
-
+    private bool isJump; 
     private bool onEarth = true;
 
     // Start is called before the first frame update
@@ -33,13 +33,18 @@ public class MoovingScript : MonoBehaviour {
 
         physicMove();
 
+        Jump();
+
     }
 
     private void Jump() {
 
+        if (!isJump)
+            return;
+        isJump = false;
         if (onEarth) {
             onEarth = false;
-
+            
             rgbd.AddForce(Vector2.up * jumpImpulse, ForceMode2D.Impulse);
         }
 
@@ -86,6 +91,10 @@ public class MoovingScript : MonoBehaviour {
 
     }
 
+
+
+
+
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.transform.tag == "obst" && collision.transform.position.y < transform.position.y) {
 
@@ -108,7 +117,7 @@ public class MoovingScript : MonoBehaviour {
     }
 
     public void JumpAction() {
-
+        
         StartCoroutine(Jumping());
 
     }
@@ -116,8 +125,7 @@ public class MoovingScript : MonoBehaviour {
     private IEnumerator Jumping() {
 
         yield return new WaitForSeconds(delay);
-
-        Jump();
+        isJump = true;
 
     }
 }

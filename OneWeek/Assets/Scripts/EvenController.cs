@@ -34,4 +34,13 @@ public class EvenController : MonoBehaviour {
         }
     }
 
+    public event Action<Transform> onSetPointOfVeiw;
+    public void SetPointOfVeiw(Transform pointOfVeiw) {
+
+        if (onSetPointOfVeiw != null) {
+            onSetPointOfVeiw(pointOfVeiw);
+        }
+    
+    }
+
 }
