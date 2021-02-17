@@ -39,14 +39,14 @@ public class TeamUp : MonoBehaviour {
         }
         if (isTeamUp) {
 
-            if (activeCorns[currenIndex].isComplete) {
-                Debug.Log("Next");
-                currenIndex++;
-                if (currenIndex < activeCorns.Count)
-                    lowerBrick = activeCorns[currenIndex].MoveToTower(lowerBrick, currenIndex, lowerBrick.GetComponent<Rigidbody2D>());
-                else
-                    isTeamUp = false;
-            }
+            //if (activeCorns[currenIndex].isComplete) {
+            //    Debug.Log("Next");
+            //    currenIndex++;
+            //    if (currenIndex < activeCorns.Count)
+            //        lowerBrick = activeCorns[currenIndex].MoveToTower(lowerBrick, currenIndex, lowerBrick.GetComponent<Rigidbody2D>());
+            //    else
+            //        isTeamUp = false;
+            //}
 
         }
 
@@ -89,7 +89,12 @@ public class TeamUp : MonoBehaviour {
         lowerBrick = activeCorns[0].MoveToTower(null, 0, null);
         currenIndex = 1;
         isTeamUp = true;
-        lowerBrick = activeCorns[currenIndex].MoveToTower(lowerBrick, currenIndex, lowerBrick.GetComponent<Rigidbody2D>());
+        //lowerBrick = activeCorns[currenIndex].MoveToTower(lowerBrick, currenIndex, lowerBrick.GetComponent<Rigidbody2D>());
+
+        for (currenIndex = 1; currenIndex < activeCorns.Count; currenIndex++) {
+            lowerBrick = activeCorns[currenIndex].MoveToTower(lowerBrick, currenIndex, lowerBrick.GetComponent<Rigidbody2D>());
+        }
+
     }
 
 }

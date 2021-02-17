@@ -27,8 +27,9 @@ MonoBehaviour:
     - Assets/Scripts/MoovingScript.cs
     - Assets/Scripts/TeamUp.cs
     - Assets/Scripts/TeamUpMooving.cs
+    - ProjectSettings/Physics2DSettings.asset
     - 
-    m_Values: 0000000000000000000000000000
+    m_Values: 000000000000000000000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
