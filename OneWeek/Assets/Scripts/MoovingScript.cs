@@ -86,14 +86,11 @@ public class MoovingScript : MonoBehaviour {
                 rgbd.velocity = new Vector2(0, rgbd.velocity.y);
             }
 
+            
 
         }
 
     }
-
-
-
-
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.transform.tag == "obst" && collision.transform.position.y < transform.position.y) {
@@ -128,4 +125,8 @@ public class MoovingScript : MonoBehaviour {
         isJump = true;
 
     }
+
+  
+    
+
 }

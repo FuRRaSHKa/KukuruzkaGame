@@ -13,23 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
-    m_Keys:
-    - Assets/Material.meta
-    - Assets/Material/PhysicsMaterials.meta
-    - Assets/Material/PhysicsMaterials/New Physics Material 2D.physicsMaterial2D
-    - Assets/Material/PhysicsMaterials/New Physics Material 2D.physicsMaterial2D.meta
-    - Assets/Prefabs/Corn.prefab
-    - Assets/Prefabs/Corn.prefab.meta
-    - "Assets/Prefabs/\u041A\u0443\u043A\u0443\u0440\u0443\u0437\u0430 (2).prefab"
-    - Assets/Scenes/SampleScene.unity
-    - Assets/Scripts/InteractWithCorn.cs
-    - Assets/Scripts/InteractWithCorn.cs.meta
-    - Assets/Scripts/MoovingScript.cs
-    - Assets/Scripts/TeamUp.cs
-    - Assets/Scripts/TeamUpMooving.cs
-    - ProjectSettings/Physics2DSettings.asset
-    - 
-    m_Values: 000000000000000000000000000000
+    m_Keys: []
+    m_Values: 
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

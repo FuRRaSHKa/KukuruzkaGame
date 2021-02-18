@@ -12,10 +12,8 @@ public class TeamUpMooving : MonoBehaviour {
     private Transform target;
     private Rigidbody2D rgbdToAttach;
     public Vector2 direction;
-    private SpringJoint2D springJoint2D;
-    private float grScale;
+    private HingeJoint2D hingeJoint2D;
     private MoovingScript moovingScript;
-    private bool specialLocked =false;
 
     [HideInInspector]
     public bool isComplete = true;
@@ -24,31 +22,23 @@ public class TeamUpMooving : MonoBehaviour {
     private void Start() {
         moovingScript = GetComponent<MoovingScript>();
         rgbd2d = GetComponent<Rigidbody2D>();
-        springJoint2D = GetComponent<SpringJoint2D>();
-        springJoint2D.enabled = false;
-        grScale = rgbd2d.gravityScale;
+        hingeJoint2D = GetComponent<HingeJoint2D>();
+        hingeJoint2D.enabled = false;
     }
 
     private void Update() {
 
         if (!isComplete && target != null) {
-            if ((target.position + new Vector3(0, 3.5f, 0) -  transform.position ).magnitude <= minDistance) {
-
+            if ((target.position + new Vector3(0, 3.5f, 0) - transform.position).magnitude <= minDistance) {
+                rgbd2d.velocity = Vector2.zero;
                 isComplete = true;
-                Attach();        
+                Attach();
             }
 
             direction = (target.position + new Vector3(0, 3.5f, 0) - transform.position).normalized;
 
 
 
-        }
-
-        if (rgbdToAttach != null && teamedUp && !specialLocked) {
-            if (!rgbdToAttach.freezeRotation && rgbd2d.freezeRotation) {
-                Debug.Log(true);
-                NoAttach();
-            }
         }
 
     }
@@ -68,10 +58,26 @@ public class TeamUpMooving : MonoBehaviour {
 
     private void Attach() {
 
-        rgbd2d.gravityScale = grScale;
-        springJoint2D.enabled = true;
-        springJoint2D.connectedBody = rgbdToAttach;
-        springJoint2D.anchor = new Vector2(-0.15f, -1.7f);
+        hingeJoint2D.enabled = true;
+        hingeJoint2D.connectedBody = rgbdToAttach;
+        hingeJoint2D.anchor = new Vector2(-0.15f, -1.7f);
+        UnlockAngle();
+    }
+
+    private void UnlockAngle() {
+        if (rgbdToAttach == null) {
+            rgbd2d.constraints = RigidbodyConstraints2D.FreezeAll;
+            return;
+        }
+
+        rgbd2d.freezeRotation = false;
+
+    }
+
+    private void LockAngle() {
+       
+        rgbd2d.constraints = RigidbodyConstraints2D.None;
+        rgbd2d.freezeRotation = true;
 
     }
 
@@ -83,70 +89,75 @@ public class TeamUpMooving : MonoBehaviour {
     /// <param name="rgbd"> rigidbody we should attach to </param>
     public Transform MoveToTower(Transform target, int index, Rigidbody2D rgbdToAttach) {
         teamedUp = true;
-        if (index == 0)
+        if (index == 0) {
+            UnlockAngle();
             return transform;
+        }
 
         this.target = target;
         this.rgbdToAttach = rgbdToAttach;
         isComplete = false;
 
-        rgbd2d.gravityScale = 1;
         moovingScript.enabled = false;
 
         return transform;
-        
+
     }
 
-    public void UnlockAngle() {
 
-        if (!teamedUp)
-            return;
 
-        if (rgbdToAttach == null) {
-            rgbd2d.freezeRotation = true;
-            rgbd2d.constraints = RigidbodyConstraints2D.FreezeAll;
+    public void NoAttach(int index) {
+
+        if (index == 0) {
+            LockAngle();
             return;
         }
 
-        rgbd2d.freezeRotation = false;
-        rgbdToAttach.GetComponent<TeamUpMooving>().UnlockAngle();
-        
-    }
-
-    public void LockAngle() {
-
         if (!teamedUp)
             return;
 
-        gameObject.layer = 0;
-
-        if(rgbdToAttach == null) {
-            teamedUp = true;  
-            rgbd2d.constraints = RigidbodyConstraints2D.None;
-            rgbd2d.freezeRotation = true;
-            GetComponent<MoovingScript>().enabled = false;
-            return;
-        }
-
-        rgbd2d.freezeRotation = true;
-        rgbdToAttach.GetComponent<TeamUpMooving>().LockAngle();
-        specialLocked = true;
-    }
-
-    public void NoAttach() {
-
-        if (!teamedUp)
-            return;
-        
         teamedUp = false;
         isComplete = false;
         rgbdToAttach = null;
         target = null;
-        springJoint2D.connectedBody = null;
-        
-        springJoint2D.enabled = false;
+        hingeJoint2D.connectedBody = null;
+
+        hingeJoint2D.enabled = false;
         moovingScript.enabled = true;
 
+        rgbdToAttach = null;
+        float angle = Random.Range(-89, 89);
+        StartCoroutine(Rotate());
+        rgbd2d.AddForce(new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)).normalized * 160f, ForceMode2D.Impulse);
+
     }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (transform.rotation.eulerAngles.z != 0 && rgbdToAttach == null) {
+
+            rgbd2d.AddForce(Vector2.up * 200f, ForceMode2D.Impulse);
+           
+        }
+    }
+
+    IEnumerator Rotate() {
+
+        float angle = transform.eulerAngles.z;
+
+        rgbd2d.angularVelocity = -angle * 1.5f;
+
+        while (transform.eulerAngles.z != 0) {
+            yield return null;
+            if (transform.eulerAngles.z > -5 && transform.eulerAngles.z < 5) {
+                transform.eulerAngles = Vector3.zero;
+                rgbd2d.freezeRotation = true;
+                yield break;
+            }
+
+        }
+
+
+    }
+
 
 }

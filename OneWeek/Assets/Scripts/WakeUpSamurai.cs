@@ -5,7 +5,7 @@ using UnityEngine;
 public class WakeUpSamurai : MonoBehaviour {
 
     public bool IsAlive = false;
-    public float maxActiveDistance;
+    
 
     private Transform pointOfView;
 
@@ -15,6 +15,7 @@ public class WakeUpSamurai : MonoBehaviour {
     }
 
     private void Start() {
+
         EvenController.current.onSetPointOfVeiw += SetPointOfVeiw;
 
         if (!IsAlive) {
@@ -34,7 +35,7 @@ public class WakeUpSamurai : MonoBehaviour {
         if (pointOfView == null)
             return;
 
-        if ((transform.position - pointOfView.transform.position).magnitude > maxActiveDistance) {
+        if ((transform.position - pointOfView.transform.position).magnitude > Camera.main.orthographicSize) {
             GetComponent<MoovingScript>().enabled = false;
             IsAlive = false;
         }
@@ -60,5 +61,6 @@ public class WakeUpSamurai : MonoBehaviour {
 
     }
 
+    
 
 }
