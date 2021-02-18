@@ -11,7 +11,7 @@ public class InteractWithCorn : MonoBehaviour {
 
         springJoint2D = GetComponent<SpringJoint2D>();
 
-        EvenController.current.onMouseInteraction += SetConnectedBody;
+       
 
     }
 

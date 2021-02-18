@@ -43,13 +43,6 @@ public class EvenController : MonoBehaviour {
     
     }
 
-    public event Action<Rigidbody2D> onMouseInteraction;
-    public void MouseInteraction(Rigidbody2D rgbd) {
-
-        if (onMouseInteraction != null) {
-            onMouseInteraction(rgbd);
-        }
-
-    }
+   
 
 }

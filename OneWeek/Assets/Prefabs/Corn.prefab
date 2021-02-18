@@ -62,6 +62,8 @@ GameObject:
   - component: {fileID: 2982035337258701678}
   - component: {fileID: 8324917025611530543}
   - component: {fileID: 5851667355231488248}
+  - component: {fileID: 5721690349371866907}
+  - component: {fileID: 6186719522285152684}
   m_Layer: 8
   m_Name: Corn
   m_TagString: Player
@@ -152,6 +154,7 @@ MonoBehaviour:
   minDistance: 0.1
   maxSpeed: 10
   direction: {x: 0, y: 0}
+  hingeJoints2D: []
   isComplete: 1
   teamedUp: 0
 --- !u!70 &8324917025611530543
@@ -192,8 +195,44 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -20
-    m_UpperAngle: 20
+    m_LowerAngle: 0
+    m_UpperAngle: 359
+--- !u!233 &5721690349371866907
+HingeJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2982035337258701648}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 4.0505104, y: -0.534223}
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 0
+  m_AngleLimits:
+    m_LowerAngle: 0
+    m_UpperAngle: 359
+--- !u!114 &6186719522285152684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2982035337258701648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b855eb113b8aad48ab41d268d1cbcb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2982035336576102749
 PrefabInstance:
   m_ObjectHideFlags: 0

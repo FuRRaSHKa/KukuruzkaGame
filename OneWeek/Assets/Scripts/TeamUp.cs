@@ -56,7 +56,6 @@ public class TeamUp : MonoBehaviour {
         isTeamUp = false;
         StartCoroutine(ChangeCamSize(oldCamSize));
 
-        EvenController.current.MouseInteraction(null);
     }
 
     public void Tower() {
@@ -122,15 +121,15 @@ public class TeamUp : MonoBehaviour {
 
         }
 
-        lowerBrick = activeCorns[0].MoveToTower(null, 0, null);
+        lowerBrick = activeCorns[0].MoveToTower(null, 0, null, false);
         currenIndex = 1;
         //lowerBrick = activeCorns[currenIndex].MoveToTower(lowerBrick, currenIndex, lowerBrick.GetComponent<Rigidbody2D>());
 
         for (currenIndex = 1; currenIndex < activeCorns.Count; currenIndex++) {
-            lowerBrick = activeCorns[currenIndex].MoveToTower(lowerBrick, currenIndex, lowerBrick.GetComponent<Rigidbody2D>());
+            lowerBrick = activeCorns[currenIndex].MoveToTower(lowerBrick, currenIndex, lowerBrick.GetComponent<Rigidbody2D>(), currenIndex == activeCorns.Count-1 ? true : false);
         }
 
-        EvenController.current.MouseInteraction(activeCorns[currenIndex-1].GetComponent<Rigidbody2D>());
+        
 
     }
 

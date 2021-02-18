@@ -12,18 +12,28 @@ public class TeamUpMooving : MonoBehaviour {
     private Transform target;
     private Rigidbody2D rgbdToAttach;
     public Vector2 direction;
-    private HingeJoint2D hingeJoint2D;
+    public HingeJoint2D[] hingeJoints2D;
     private MoovingScript moovingScript;
+
+    private float oldMass, oldDrag; 
+    private bool isLast = false;
 
     [HideInInspector]
     public bool isComplete = true;
     public bool teamedUp;
 
     private void Start() {
+
         moovingScript = GetComponent<MoovingScript>();
         rgbd2d = GetComponent<Rigidbody2D>();
-        hingeJoint2D = GetComponent<HingeJoint2D>();
-        hingeJoint2D.enabled = false;
+        hingeJoints2D = GetComponents<HingeJoint2D>();
+        JointAngleLimits2D n = new JointAngleLimits2D();
+        n.max = 20f;
+        n.min = -20f;
+        hingeJoints2D[0].limits = n;
+        hingeJoints2D[0].enabled = false;
+        hingeJoints2D[1].enabled = false;
+
     }
 
     private void Update() {
@@ -36,8 +46,6 @@ public class TeamUpMooving : MonoBehaviour {
             }
 
             direction = (target.position + new Vector3(0, 3.5f, 0) - transform.position).normalized;
-
-
 
         }
 
@@ -58,15 +66,19 @@ public class TeamUpMooving : MonoBehaviour {
 
     private void Attach() {
 
-        hingeJoint2D.enabled = true;
-        hingeJoint2D.connectedBody = rgbdToAttach;
-        hingeJoint2D.anchor = new Vector2(-0.15f, -1.7f);
+        hingeJoints2D[0].enabled = true;
+        hingeJoints2D[0].connectedBody = rgbdToAttach;
+        hingeJoints2D[0].anchor = new Vector2(-0.15f, -1.7f);
         UnlockAngle();
     }
 
     private void UnlockAngle() {
+
         if (rgbdToAttach == null) {
-            rgbd2d.constraints = RigidbodyConstraints2D.FreezeAll;
+            oldDrag = rgbd2d.drag;
+            oldMass = rgbd2d.mass;
+            rgbd2d.mass = 500;
+            rgbd2d.drag = 5;
             return;
         }
 
@@ -75,7 +87,14 @@ public class TeamUpMooving : MonoBehaviour {
     }
 
     private void LockAngle() {
-       
+
+        if (rgbdToAttach == null) {
+            rgbd2d.mass = oldMass;
+            rgbd2d.drag = oldDrag;
+           
+        }
+
+
         rgbd2d.constraints = RigidbodyConstraints2D.None;
         rgbd2d.freezeRotation = true;
 
@@ -87,9 +106,23 @@ public class TeamUpMooving : MonoBehaviour {
     /// <param name="target"> Target we moving for </param>
     /// <param name="index">Index of corn in corn tower</param>
     /// <param name="rgbd"> rigidbody we should attach to </param>
-    public Transform MoveToTower(Transform target, int index, Rigidbody2D rgbdToAttach) {
+    public Transform MoveToTower(Transform target, int index, Rigidbody2D rgbdToAttach, bool isLast) {
+        this.isLast = isLast;
         teamedUp = true;
+
+
         if (index == 0) {
+
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 3f);
+
+            for (int i = 0; i < colliders.Length; i++) {
+                if (colliders[i].tag != "Player") {
+                    hingeJoints2D[1].enabled = true;
+                    hingeJoints2D[1].connectedBody = colliders[i].GetComponent<Rigidbody2D>();
+                    hingeJoints2D[1].anchor = new Vector2(-0.15f, -1.7f);
+                }
+            }
+
             UnlockAngle();
             return transform;
         }
@@ -103,8 +136,6 @@ public class TeamUpMooving : MonoBehaviour {
         return transform;
 
     }
-
-
 
     public void NoAttach(int index) {
 
@@ -120,9 +151,9 @@ public class TeamUpMooving : MonoBehaviour {
         isComplete = false;
         rgbdToAttach = null;
         target = null;
-        hingeJoint2D.connectedBody = null;
+        hingeJoints2D[0].connectedBody = null;
 
-        hingeJoint2D.enabled = false;
+        hingeJoints2D[0].enabled = false;
         moovingScript.enabled = true;
 
         rgbdToAttach = null;
@@ -136,7 +167,7 @@ public class TeamUpMooving : MonoBehaviour {
         if (transform.rotation.eulerAngles.z != 0 && rgbdToAttach == null) {
 
             rgbd2d.AddForce(Vector2.up * 200f, ForceMode2D.Impulse);
-           
+            Rotate();
         }
     }
 
@@ -144,7 +175,7 @@ public class TeamUpMooving : MonoBehaviour {
 
         float angle = transform.eulerAngles.z;
 
-        rgbd2d.angularVelocity = -angle * 1.5f;
+        rgbd2d.angularVelocity = -90 * 1.5f;
 
         while (transform.eulerAngles.z != 0) {
             yield return null;
@@ -156,8 +187,8 @@ public class TeamUpMooving : MonoBehaviour {
 
         }
 
-
     }
 
+    
 
 }
