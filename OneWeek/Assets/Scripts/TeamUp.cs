@@ -30,14 +30,14 @@ public class TeamUp : MonoBehaviour {
 
         if (!isTeamUp) {
             if (Input.GetKeyDown(KeyCode.T)) {
-                Debug.Log("Ke");
+
                 Tower();
 
             }
         } else {
 
             if (Input.GetKeyDown(KeyCode.T)) {
-                Debug.Log("ne");
+
                 UnTower();
 
             }
@@ -51,8 +51,10 @@ public class TeamUp : MonoBehaviour {
         for (int i = 0; i < activeCorns.Count; i++) {
 
             activeCorns[i].NoAttach(i);
+            activeCorns[i].MoveToUntower(activeCorns[activeCorns.Count-1].transform, i);
 
         }
+
         isTeamUp = false;
         StartCoroutine(ChangeCamSize(oldCamSize));
 
@@ -83,19 +85,32 @@ public class TeamUp : MonoBehaviour {
 
         }
 
-        if (activeCount != 0) {
+        if (activeCount > 1) {
             pos = new Vector3(sumX / activeCount, sumY / activeCount, 0);
-            int id = 0;
-            float minDist = (pos - (Vector2)activeCorns[0].transform.position).sqrMagnitude;
+            int id = -1;
+
+            float minDist = 0;
+        
+            if (!activeCorns[0].GetComponent<WakeUpSamurai>().isFirst) {
+                minDist = (pos - (Vector2)activeCorns[0].transform.position).sqrMagnitude;
+                id = 0;
+            } else {
+                id = 1;
+                minDist = (pos - (Vector2)activeCorns[1].transform.position).sqrMagnitude;
+            }
+
 
             for (int i = 1; i < activeCorns.Count; i++) {
+                if (activeCorns[i].GetComponent<WakeUpSamurai>().isFirst)
+                    continue;
+
                 float mag = (pos - (Vector2)activeCorns[i].transform.position).sqrMagnitude;
                 if (mag < minDist) {
                     id = i;
                 }
 
             }
-            if (id != 0) {
+            if (id != -1) {
                 TeamUpMooving temp = activeCorns[0];
                 activeCorns[0] = activeCorns[id];
                 activeCorns[id] = temp;
@@ -138,7 +153,7 @@ public class TeamUp : MonoBehaviour {
         float oldSize = cinemachineVirtualCamera.m_Lens.OrthographicSize;
 
         if (oldSize == size) {
-            Debug.Log("ye");
+
             yield break;
         }
        

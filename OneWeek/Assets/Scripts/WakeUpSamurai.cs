@@ -5,7 +5,8 @@ using UnityEngine;
 public class WakeUpSamurai : MonoBehaviour {
 
     public bool IsAlive = false;
-    
+    [HideInInspector]
+    public bool isFirst;
 
     private Transform pointOfView;
 
@@ -17,6 +18,8 @@ public class WakeUpSamurai : MonoBehaviour {
     private void Start() {
 
         EvenController.current.onSetPointOfVeiw += SetPointOfVeiw;
+
+        isFirst = IsAlive;
 
         if (!IsAlive) {
             GetComponent<MoovingScript>().enabled = false;
@@ -35,11 +38,12 @@ public class WakeUpSamurai : MonoBehaviour {
         if (pointOfView == null)
             return;
 
-        if ((transform.position - pointOfView.transform.position).magnitude > Camera.main.orthographicSize) {
-            GetComponent<MoovingScript>().enabled = false;
-            IsAlive = false;
+        if (!isFirst) {
+            if ((transform.position - pointOfView.transform.position).magnitude > Camera.main.orthographicSize) {
+                GetComponent<MoovingScript>().enabled = false;
+                IsAlive = false;
+            }
         }
-
 
 
     }
@@ -53,6 +57,10 @@ public class WakeUpSamurai : MonoBehaviour {
             IsAlive = true;
             GetComponent<MoovingScript>().enabled = true;
 
+            float random = Random.Range(0f, .5f);
+            GetComponent<MoovingScript>().delay = random;
+            GetComponent<MoovingScript>().MoveStatChange (collision.transform.parent.GetComponent<MoovingScript>().horizontalDirection);
+
         }
     }
 
@@ -60,7 +68,6 @@ public class WakeUpSamurai : MonoBehaviour {
         this.pointOfView = pointOfView;
 
     }
-
     
 
 }

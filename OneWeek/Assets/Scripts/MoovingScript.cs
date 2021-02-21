@@ -11,18 +11,20 @@ public class MoovingScript : MonoBehaviour {
     public float stopSpeed;
 
     private Rigidbody2D rgbd;
-    private float horizontalDirection = 0;
+    [HideInInspector]
+    public float horizontalDirection = 0;
     private bool isJump; 
     private bool onEarth = true;
+    private WakeUpSamurai wkps;
+    private AnimatorController animatorController;
 
     // Start is called before the first frame update
     void Start() {
-
         rgbd = GetComponent<Rigidbody2D>();
-
+        animatorController = GetComponent<AnimatorController>();
         EvenController.current.onMoveStatUpdate += MoveStatChange;
         EvenController.current.onJumpAcrion += JumpAction;
-
+        wkps = GetComponent<WakeUpSamurai>();
     }
 
     private void Update() {
@@ -93,15 +95,14 @@ public class MoovingScript : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.transform.tag == "obst" && collision.transform.position.y < transform.position.y) {
-
+        if ((collision.transform.tag == "obst" || collision.transform.tag == "Botton")  && collision.transform.position.y < transform.position.y) {
+            animatorController.SetInAir();
             onEarth = true;
-
         }
     }
 
     public void MoveStatChange(float dir) {
-
+        
         StartCoroutine(Update(dir));
 
     }
@@ -109,12 +110,14 @@ public class MoovingScript : MonoBehaviour {
     private IEnumerator Update(float dir) {
 
         yield return new WaitForSeconds(delay);
-
+        animatorController.SetRunAnim(dir);
         horizontalDirection = dir;
     }
 
     public void JumpAction() {
-        
+        if (!wkps.IsAlive)
+            return;
+
         StartCoroutine(Jumping());
 
     }
@@ -123,7 +126,7 @@ public class MoovingScript : MonoBehaviour {
 
         yield return new WaitForSeconds(delay);
         isJump = true;
-
+        animatorController.SetJumpAnim();
     }
 
   

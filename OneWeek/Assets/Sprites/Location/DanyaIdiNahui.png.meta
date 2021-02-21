@@ -1,0 +1,442 @@
+fileFormatVersion: 2
+guid: 14e1db394f2a72a498d1de239a4f1f62
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8198891839894300545
+    second: DanyaIdiNahui_0
+  - first:
+      213: 2587408087825741612
+    second: DanyaIdiNahui_1
+  - first:
+      213: 65125479349428165
+    second: DanyaIdiNahui_2
+  - first:
+      213: 1399610948078357539
+    second: DanyaIdiNahui_3
+  - first:
+      213: 4710976759553863202
+    second: DanyaIdiNahui_4
+  - first:
+      213: -9011717309433664400
+    second: DanyaIdiNahui_5
+  - first:
+      213: -5242844218291689759
+    second: DanyaIdiNahui_6
+  - first:
+      213: 5932626807757457765
+    second: DanyaIdiNahui_7
+  - first:
+      213: 2070838549383361953
+    second: DanyaIdiNahui_8
+  - first:
+      213: 7232812866326701064
+    second: DanyaIdiNahui_9
+  - first:
+      213: -7556056412391112345
+    second: DanyaIdiNahui_10
+  - first:
+      213: 8030044876454160253
+    second: DanyaIdiNahui_11
+  - first:
+      213: 1316304522106908387
+    second: DanyaIdiNahui_12
+  - first:
+      213: 6079112500526894704
+    second: DanyaIdiNahui_13
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DanyaIdiNahui_0
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 3978
+        width: 1263
+        height: 1040
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 187afb450b058c170800000000000000
+      internalID: 8198891839894300545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_1
+      rect:
+        serializedVersion: 2
+        x: 2015
+        y: 4162
+        width: 1053
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2773db72f158e320800000000000000
+      internalID: 2587408087825741612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_2
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 3276
+        width: 839
+        height: 428
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cf1376474f57e000800000000000000
+      internalID: 65125479349428165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_3
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 3407
+        width: 913
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32c45f7edba6c6310800000000000000
+      internalID: 1399610948078357539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_4
+      rect:
+        serializedVersion: 2
+        x: 2497
+        y: 3019
+        width: 571
+        height: 645
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22e245a2760c06140800000000000000
+      internalID: 4710976759553863202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_5
+      rect:
+        serializedVersion: 2
+        x: 3071
+        y: 175
+        width: 3586
+        height: 3312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07ca7fa6ad2ffe280800000000000000
+      internalID: -9011717309433664400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_6
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 2404
+        width: 197
+        height: 672
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e6630416fcad37b0800000000000000
+      internalID: -5242844218291689759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_7
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 2738
+        width: 913
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 569c75536ace45250800000000000000
+      internalID: 5932626807757457765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_8
+      rect:
+        serializedVersion: 2
+        x: 1187
+        y: 2354
+        width: 1280
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a53e2b50b81dbc10800000000000000
+      internalID: 2070838549383361953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_9
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 1929
+        width: 1751
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80427481bfc106460800000000000000
+      internalID: 7232812866326701064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_10
+      rect:
+        serializedVersion: 2
+        x: 6644
+        y: 1869
+        width: 24
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7618d940abe732790800000000000000
+      internalID: -7556056412391112345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_11
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 1374
+        width: 1561
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d77ee772543707f60800000000000000
+      internalID: 8030044876454160253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_12
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 909
+        width: 1417
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ee2c602df3744210800000000000000
+      internalID: 1316304522106908387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DanyaIdiNahui_13
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 241
+        width: 2470
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07eca875c985d5450800000000000000
+      internalID: 6079112500526894704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

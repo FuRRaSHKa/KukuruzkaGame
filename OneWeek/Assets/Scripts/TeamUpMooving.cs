@@ -14,16 +14,19 @@ public class TeamUpMooving : MonoBehaviour {
     public Vector2 direction;
     public HingeJoint2D[] hingeJoints2D;
     private MoovingScript moovingScript;
+    private AnimatorController animatorController;
 
-    private float oldMass, oldDrag; 
+    private float oldMass, oldDrag;
     private bool isLast = false;
+    private int id;
+    private bool untower = false;
 
     [HideInInspector]
     public bool isComplete = true;
     public bool teamedUp;
 
     private void Start() {
-
+        animatorController = GetComponent<AnimatorController>();
         moovingScript = GetComponent<MoovingScript>();
         rgbd2d = GetComponent<Rigidbody2D>();
         hingeJoints2D = GetComponents<HingeJoint2D>();
@@ -31,6 +34,7 @@ public class TeamUpMooving : MonoBehaviour {
         n.max = 20f;
         n.min = -20f;
         hingeJoints2D[0].limits = n;
+
         hingeJoints2D[0].enabled = false;
         hingeJoints2D[1].enabled = false;
 
@@ -39,13 +43,32 @@ public class TeamUpMooving : MonoBehaviour {
     private void Update() {
 
         if (!isComplete && target != null) {
-            if ((target.position + new Vector3(0, 3.5f, 0) - transform.position).magnitude <= minDistance) {
-                rgbd2d.velocity = Vector2.zero;
-                isComplete = true;
-                Attach();
+
+            if (untower) {
+                direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
+                if (((Vector2)target.position - (Vector2)transform.position).magnitude <= minDistance) {
+                    rgbd2d.velocity = Vector2.zero;
+                    isComplete = true;
+                    untower = false;
+                    moovingScript.enabled = true;
+                    animatorController.JojoPos(false);
+                }
+            } else {
+
+                direction = (target.position + new Vector3(0, 3f, 0) - transform.position).normalized;
+
+                if ( ( (Vector2)target.position + new Vector2(0, 3f) - (Vector2)transform.position).magnitude <= minDistance) {
+
+                    rgbd2d.velocity = Vector2.zero;
+                    isComplete = true;
+                    moovingScript.enabled = true;
+                    Attach();
+
+                }
             }
 
-            direction = (target.position + new Vector3(0, 3.5f, 0) - transform.position).normalized;
+
+
 
         }
 
@@ -68,8 +91,9 @@ public class TeamUpMooving : MonoBehaviour {
 
         hingeJoints2D[0].enabled = true;
         hingeJoints2D[0].connectedBody = rgbdToAttach;
-        hingeJoints2D[0].anchor = new Vector2(-0.15f, -1.7f);
+        hingeJoints2D[0].anchor = new Vector2(-0.15f, -0.83f);
         UnlockAngle();
+
     }
 
     private void UnlockAngle() {
@@ -78,7 +102,7 @@ public class TeamUpMooving : MonoBehaviour {
             oldDrag = rgbd2d.drag;
             oldMass = rgbd2d.mass;
             rgbd2d.mass = 500;
-            rgbd2d.drag = 5;
+            rgbd2d.drag = 2;
             return;
         }
 
@@ -91,7 +115,7 @@ public class TeamUpMooving : MonoBehaviour {
         if (rgbdToAttach == null) {
             rgbd2d.mass = oldMass;
             rgbd2d.drag = oldDrag;
-           
+
         }
 
 
@@ -104,24 +128,19 @@ public class TeamUpMooving : MonoBehaviour {
     /// Move Object to pos in tower
     /// </summary>
     /// <param name="target"> Target we moving for </param>
-    /// <param name="index">Index of corn in corn tower</param>
-    /// <param name="rgbd"> rigidbody we should attach to </param>
-    public Transform MoveToTower(Transform target, int index, Rigidbody2D rgbdToAttach, bool isLast) {
+    /// <param name="id">Index of corn in corn tower</param>
+    /// <param name="rgbdToAttach"> rigidbody we should attach to </param>
+    public Transform MoveToTower(Transform target, int id, Rigidbody2D rgbdToAttach, bool isLast) {
         this.isLast = isLast;
         teamedUp = true;
 
+        this.id = id;
 
-        if (index == 0) {
+        animatorController.JojoPos(true);
 
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 3f);
+        if (id == 0) {
 
-            for (int i = 0; i < colliders.Length; i++) {
-                if (colliders[i].tag != "Player") {
-                    hingeJoints2D[1].enabled = true;
-                    hingeJoints2D[1].connectedBody = colliders[i].GetComponent<Rigidbody2D>();
-                    hingeJoints2D[1].anchor = new Vector2(-0.15f, -1.7f);
-                }
-            }
+
 
             UnlockAngle();
             return transform;
@@ -134,6 +153,16 @@ public class TeamUpMooving : MonoBehaviour {
         moovingScript.enabled = false;
 
         return transform;
+
+    }
+
+    public void MoveToUntower(Transform target, int id) {
+
+        untower = true;
+        this.target = target;
+        isComplete = false;
+        moovingScript.enabled = false;
+
 
     }
 
@@ -189,6 +218,6 @@ public class TeamUpMooving : MonoBehaviour {
 
     }
 
-    
+
 
 }

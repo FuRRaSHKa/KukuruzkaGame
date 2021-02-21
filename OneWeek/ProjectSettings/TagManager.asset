@@ -7,6 +7,7 @@ TagManager:
   - obst
   - PlayerTrigger
   - Cursos
+  - Botton
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - 
   - Player
-  - 
+  - Botton
   - 
   - 
   - 
@@ -43,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Obstacles
+    uniqueID: 3689005229
     locked: 0
